@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Medium";   /*Can be any text*/
+    src: local("AirbnbCerealMedium"),
+      url("./font/AirbnbCereal_W_Md.otf") format("truetype");
+  }
+  @font-face {
+    font-family: "Black";   /*Can be any text*/
+    src: local("Roboto-Black"),
+      url("./font/Roboto-Black.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Light";   /*Can be any text*/
+    src: local("Roboto-Light"),
+      url("./font/Roboto-Light.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Light";   /*Can be any text*/
+    src: local("Roboto-Medium"),
+      url("./font/Roboto-Medium.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Light";   /*Can be any text*/
+    src: local("Roboto-regular"),
+      url("./font/Roboto-regular.ttf") format("truetype");
+  }
