@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import MetaIcon from '../../assets/meta.png'
+import MetaIcon from '../../assets/meta.png';
 
 
 

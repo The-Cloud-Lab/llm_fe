@@ -12,7 +12,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import ModalList from '../modalsList/modallist'
-import Loader from "../../components/Loder";
+import Loader from "../../components/Loader";
 import Dropdown from "../../components/Dropdown";
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
@@ -37,8 +37,8 @@ export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
   const [dropdowndata, setdropdowndata] = useState();
-  const[finetunefields, setfinetunefields] = useState([]);
-  
+  const [finetunefields, setfinetunefields] = useState([]);
+
 
 
 
@@ -46,23 +46,22 @@ export default function Home() {
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
-
-  const Classificationvalue = async (filter) => {
-
-
-  };
-  const Dropdowndata = async (filter) => {
-    console.log("my dropdown data====>", filter)
+  //To do change name to get models list
+  const Dropdowndata = async (taskId) => {
+    console.log("my dropdown data====>", taskId)
     setLoader(true)
-    try {
+   try {
+
+
       const response = await axios.get('https://llmbe-a85c5f05191e.herokuapp.com/datasets', {
         params: {
-          task_id: filter
+          task_id: taskId
         },
       });
 
 
       if (response.status === 200) {
+        console.log("Dropdown data===>" ,response.data.datasets)
         setdropdowndata(response.data.datasets)
         setLoader(false);
 
@@ -70,7 +69,7 @@ export default function Home() {
 
     } catch (error) {
       console.error('Error fetching data:', error);
-    }
+    } 
     setNext(next + 1)
   }
 
@@ -96,9 +95,6 @@ export default function Home() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setNext((prevActiveStep) => prevActiveStep - 1);
   };
-  const mySelectedValue = (option) => {
-    console.log("my dropdownvalues" + option.value);
-  }
 
   const getModals = async () => {
 
@@ -114,6 +110,7 @@ export default function Home() {
     setSkipped(newSkipped);
 
     const storedValue = localStorage.getItem('filter');
+    console.log("my store value===>", storedValue)
     setLoader(true);
 
     try {
@@ -129,18 +126,6 @@ export default function Home() {
 
         setLoader(false);
         console.log(response.data);
-        // let data = response.data.map((e) => {
-        //   if (e != null) {
-        //     let resultArray = e.id.split('/')
-        //     if (resultArray[1] == null) {
-        //       return resultArray[0];
-        //     } else {
-        //       return resultArray[1];
-        //     }
-        //   }
-        //   return null;
-        // });
-
         setmodaldata(response.data);
 
       }
@@ -172,12 +157,12 @@ export default function Home() {
 
 
       if (response.status === 200) {
-    
-        console.log("my finetunedata=====>",response.data);
+
+        console.log("my finetunedata=====>", response.data);
         setfinetunefields(response.data)
-        
+
         setLoader(false);
-        
+
       }
 
     } catch (error) {
@@ -190,7 +175,10 @@ export default function Home() {
   const receiveDataFromGrandchild = (data) => {
     getFineTunesFields(data)
   };
-
+ const dataSetValue = (dataset)=>{
+  const datasetValue = dataset.value; 
+  localStorage.setItem("dataset", datasetValue);
+ }
 
   useEffect(() => {
     console.log("Api response======>");
@@ -260,7 +248,7 @@ export default function Home() {
               ) : next === 1 ? (
                 <div>
                   <div style={{ marginTop: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Dropdown mySelectedValue={mySelectedValue} dropdowndata={dropdowndata} />
+                    <Dropdown dataSetValue={dataSetValue} dropdowndata={dropdowndata} />
                   </div>
                   <div style={{ marginTop: 100 }}>
                     <Divider>

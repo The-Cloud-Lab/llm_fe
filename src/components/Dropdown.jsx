@@ -1,7 +1,7 @@
 import { useEffect, React, useState } from "react";
 import Select from 'react-select';
 
-export default function Dropdown({ mySelectedValue,dropdowndata }) {
+export default function Dropdown({ dataSetValue,dropdowndata }) {
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -23,7 +23,7 @@ export default function Dropdown({ mySelectedValue,dropdowndata }) {
         isSearchable={isSearchable}
         name="color"
         options={dropdowndata.map((item) => ({ value: item, label: item }))}
-        onChange={mySelectedValue}
+        onChange={dataSetValue}
         theme={(theme) => ({
           ...theme,
           borderRadius: 10,
