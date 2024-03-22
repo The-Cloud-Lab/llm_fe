@@ -36,25 +36,25 @@ export default function Finetune({ finetunefields }) {
         const datasetValue = localStorage.getItem('dataset');
         console.log('modelId :', modelId);
         console.log('datasetValue :', datasetValue);
-        // try {
-        //     const response = await axios.get('http://localhost:5000/train_model', {
-        //         params: {
-        //             model_id: modelId,
-        //             dataset: datasetValue,
-        //             training_args: transformedData
+        try {
+            const response = await axios.get('http://localhost:5000/train_model', {
+                params: {
+                    model_id: modelId,
+                    dataset: datasetValue,
+                    training_args: transformedData
 
 
-        //         },
-        //     });
+                },
+            });
 
 
-        //     if (response.status === 200) {
+            if (response.status === 200) {
 
-        //     }
+            }
 
-        // } catch (error) {
-        //     console.error('Error fetching data:', error);
-        // }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
 
     }
 
